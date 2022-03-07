@@ -1,35 +1,25 @@
-<head>
-    {% if page.title %}
-        {% assign title = page.title | append: " - " | append: site.title %}
-        {% assign desc = page.subtitle %}
-    {% else %}
-        {% assign title = site.title %}
-        {% assign desc = site.subtitle %}
-    {% endif %}
-    {% assign sitedir = site.url | append: site.baseurl | append: "/" %}
-    {% assign favicon_location = sitedir | append: site.favicon_location %}
+<meta charset="utf-8">
 
-    <title>{{ title }}</title>
+{% include seo.html %}
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="blog, {{ site.author }}, {{ site.title }}, jekyll">
-    <meta name="author" content="{{ site.author }}">
+{% unless site.atom_feed.hide %}
+  <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
+{% endunless %}
 
-    <meta name="description" content="{{ desc }}">
-    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ sitedir }}css/main.css">
-    <link rel="icon" type="image/ico" href="{{ favicon_location }}">
-    <link rel="shortcut-icon" type="image/ico" href="{{ favicon_location }}">
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- For Facebook -->
-    <meta property="og:title" content="{{ title }}" />
-    <meta property="og:image" itemprop="image" content="{{ favicon_location }}" />
-    <meta property="og:description" content="{{ desc }}" />
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
 
-    <!-- For Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="{{ title }}" />
-    <meta name="twitter:description" content="{{ desc }}" />
-    <meta name="twitter:image" content="{{ favicon_location }}" />
-</head>
+<!-- For all browsers -->
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+{% if site.head_scripts %}
+  {% for script in site.head_scripts %}
+    <script src="{{ script | relative_url }}"></script>
+  {% endfor %}
+{% endif %}
