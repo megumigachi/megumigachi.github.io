@@ -1,45 +1,35 @@
-<meta charset="UTF-8">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<head>
+    {% if page.title %}
+        {% assign title = page.title | append: " - " | append: site.title %}
+        {% assign desc = page.subtitle %}
+    {% else %}
+        {% assign title = site.title %}
+        {% assign desc = site.subtitle %}
+    {% endif %}
+    {% assign sitedir = site.url | append: site.baseurl | append: "/" %}
+    {% assign favicon_location = sitedir | append: site.favicon_location %}
 
-{%- if page.title -%}
-    <title>{{ page.title | escape }} · {{ site.title | escape }}</title>
-{%- else -%}
-    <title>{{ site.title | escape }}</title>
-{%- endif -%}
+    <title>{{ title }}</title>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="description" content="{{site.description}}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="blog, {{ site.author }}, {{ site.title }}, jekyll">
+    <meta name="author" content="{{ site.author }}">
 
-{%- if site.gitbook_version -%}
-    <meta name="generator" content="Jekyll (using style of GitBook {{ site.gitbook_version | escape }})">
-{%- else -%}
-    <meta name="generator" content="Jekyll (using style of GitBook)">
-{%- endif -%}
+    <meta name="description" content="{{ desc }}">
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ sitedir }}css/main.css">
+    <link rel="icon" type="image/ico" href="{{ favicon_location }}">
+    <link rel="shortcut-icon" type="image/ico" href="{{ favicon_location }}">
 
-{%- if site.author -%}
-    <meta name="author" content="{{ site.author | escape }}">
-{%- endif -%}
+    <!-- For Facebook -->
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:image" itemprop="image" content="{{ favicon_location }}" />
+    <meta property="og:description" content="{{ desc }}" />
 
-<link rel="stylesheet" href="{{site.baseurl}}/gitbook/style.css">
-<link rel="stylesheet" href="{{site.baseurl}}/gitbook/gitbook-plugin-fontsettings/website.css">
-<link rel="stylesheet" href="{{site.baseurl}}/gitbook/gitbook-plugin-search-pro/search.css">
-
-<link rel="stylesheet" href="{{site.baseurl}}/gitbook/rouge/{{ site.syntax_highlighter_style }}.css">
-
-<meta name="HandheldFriendly" content="true"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{site.baseurl}}/gitbook/images/apple-touch-icon-precomposed-152.png">
-<link rel="shortcut icon" href="{{site.baseurl}}/gitbook/images/favicon.ico" type="image/x-icon">
-
-<script>
-    MathJax = {
-        tex: {
-            inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        svg: {
-            fontCache: 'global'
-        }
-    };
-</script>
+    <!-- For Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta name="twitter:description" content="{{ desc }}" />
+    <meta name="twitter:image" content="{{ favicon_location }}" />
+</head>
