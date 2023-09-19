@@ -3,8 +3,6 @@ layout: post
 title: "Hello World"
 categories:
   - test1
-tags:
-  - test2
 ---
 
 
